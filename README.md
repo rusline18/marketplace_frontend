@@ -1,75 +1,68 @@
-# Nuxt Minimal Starter
+# Marketplace Frontend
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Public-facing Nuxt application for the Marketplace project: catalog
+browsing and the check-in/marks flow. Consumes the backend's public API
+(`/api/v1`).
+
+## Stack
+
+- Nuxt 4, Nuxt UI, Tailwind CSS v4
+- Tiptap (rich text editing)
+- TypeScript
+- Vitest + Vue Test Utils + happy-dom for tests
+
+## Structure
+
+```
+app/
+├── pages/         index, listings/[id], login, register
+├── composables/   useApiClient, useAuth, useListings
+├── plugins/       auth.ts
+└── layouts/       default.vue
+```
 
 ## Setup
 
-Make sure to install dependencies:
-
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
+
+Copy `.env` and point it at the backend's public API:
+
+```
+NUXT_PUBLIC_API_BASE=http://localhost:8092
+```
+
+Adjust the port to match wherever the backend's nginx container is exposed
+locally.
 
 ## Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
+```
 
-# pnpm
-pnpm dev
+Or run it in Docker (`FRONTEND_PORT` defaults to 3000):
 
-# yarn
-yarn dev
+```bash
+docker compose up
+```
 
-# bun
-bun run dev
+## Testing and Linting
+
+```bash
+npm run test           # vitest
+npm run test:coverage
+npm run lint
 ```
 
 ## Production
 
-Build the application for production:
-
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Check out the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
