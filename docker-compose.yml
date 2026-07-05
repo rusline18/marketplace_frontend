@@ -1,0 +1,12 @@
+services:
+  frontend:
+    build:
+      context: .
+    container_name: marketplace_frontend
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      - NUXT_PUBLIC_API_BASE=${NUXT_PUBLIC_API_BASE:-http://localhost:8092}
