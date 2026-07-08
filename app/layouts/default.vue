@@ -25,6 +25,9 @@ async function onLogout() {
           </UButton>
 
           <template v-if="isAuthenticated">
+            <UButton to="/orders" color="neutral" variant="ghost" icon="i-lucide-package">
+              Заказы
+            </UButton>
             <div class="hidden sm:flex items-center gap-2 text-sm text-muted">
               <UIcon name="i-lucide-user-round" class="size-4" />
               {{ user?.name }}
