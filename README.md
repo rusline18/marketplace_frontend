@@ -1,8 +1,13 @@
 # Marketplace Frontend
 
 Public-facing Nuxt application for the Marketplace project: catalog
-browsing and the check-in/marks flow. Consumes the backend's public API
-(`/api/v1`).
+browsing, a cart/checkout flow, and the check-in/marks flow. Consumes the
+backend's public API (`/api/v1`).
+
+The cart is client-side only (a `useCookie`-backed composable, no server
+state) and is available to guests; only checkout requires being logged in
+as a client, and the cart survives the login redirect. Checkout submits the
+whole cart in one call to `POST /api/v1/orders`.
 
 ## Stack
 
@@ -15,8 +20,8 @@ browsing and the check-in/marks flow. Consumes the backend's public API
 
 ```
 app/
-├── pages/         index, listings/[id], login, register
-├── composables/   useApiClient, useAuth, useListings
+├── pages/         index, listings/[id], login, register, cart
+├── composables/   useApiClient, useAuth, useListings, useCart, useOrders
 ├── plugins/       auth.ts
 └── layouts/       default.vue
 ```

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const route = useRoute()
 const { find } = useListings()
+const { add } = useCart()
+const toast = useToast()
 
 const { data: listing, status } = await useAsyncData(
   `listing-${route.params.id}`,
@@ -11,6 +13,12 @@ const statusLabels: Record<string, string> = {
   active: 'Активно',
   draft: 'Черновик',
   archived: 'В архиве',
+}
+
+function onAddToCart() {
+  if (!listing.value) return
+  add({ id: listing.value.id, title: listing.value.title, price: listing.value.price })
+  toast.add({ title: 'Добавлено в корзину', icon: 'i-lucide-shopping-cart' })
 }
 </script>
 
@@ -46,7 +54,17 @@ const statusLabels: Record<string, string> = {
         <p class="text-muted whitespace-pre-line">{{ listing.description }}</p>
 
         <template #footer>
-          <span class="text-2xl font-semibold text-highlighted">{{ listing.price }} ₽</span>
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-2xl font-semibold text-highlighted">{{ listing.price }} ₽</span>
+            <UButton
+              v-if="listing.status === 'active'"
+              color="primary"
+              icon="i-lucide-shopping-cart"
+              @click="onAddToCart"
+            >
+              В корзину
+            </UButton>
+          </div>
         </template>
       </UCard>
     </div>

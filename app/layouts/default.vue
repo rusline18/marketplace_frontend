@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { user, isAuthenticated, logout } = useAuth()
+const { totalItems } = useCart()
 const router = useRouter()
 
 async function onLogout() {
@@ -18,6 +19,11 @@ async function onLogout() {
         </NuxtLink>
 
         <div class="flex items-center gap-3">
+          <UButton to="/cart" color="neutral" variant="ghost" icon="i-lucide-shopping-cart">
+            Корзина
+            <UBadge v-if="totalItems > 0" color="primary" variant="solid" size="sm">{{ totalItems }}</UBadge>
+          </UButton>
+
           <template v-if="isAuthenticated">
             <div class="hidden sm:flex items-center gap-2 text-sm text-muted">
               <UIcon name="i-lucide-user-round" class="size-4" />
