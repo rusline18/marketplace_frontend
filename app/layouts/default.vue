@@ -28,10 +28,13 @@ async function onLogout() {
             <UButton to="/orders" color="neutral" variant="ghost" icon="i-lucide-package">
               Заказы
             </UButton>
-            <div class="hidden sm:flex items-center gap-2 text-sm text-muted">
+            <NuxtLink
+              to="/account"
+              class="hidden sm:flex items-center gap-2 text-sm text-muted hover:text-highlighted"
+            >
               <UIcon name="i-lucide-user-round" class="size-4" />
               {{ user?.name }}
-            </div>
+            </NuxtLink>
             <UButton color="neutral" variant="ghost" icon="i-lucide-log-out" @click="onLogout">
               Выйти
             </UButton>

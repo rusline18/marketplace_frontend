@@ -48,7 +48,7 @@ export function useAuth() {
     }
 
     try {
-      user.value = await api<AuthUser>('/me')
+      user.value = (await api<{ data: AuthUser }>('/me')).data
     } catch {
       token.value = null
       user.value = null
@@ -58,7 +58,7 @@ export function useAuth() {
   }
 
   async function updateProfile(payload: Partial<{ name: string, email: string, password: string, password_confirmation: string }>) {
-    user.value = await api<AuthUser>('/me', { method: 'PATCH', body: payload })
+    user.value = (await api<{ data: AuthUser }>('/me', { method: 'PATCH', body: payload })).data
     return user.value
   }
 
